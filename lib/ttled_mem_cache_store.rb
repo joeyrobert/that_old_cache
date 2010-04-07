@@ -9,7 +9,7 @@ module ActiveSupport
 
       # Adds the following option:
       #   :valid_for => number of seconds from now that the cache with "expire"
-      #   :raw is not supported with :valid_raw
+      #   :raw is not supported with :valid_for
       def write(key, value, options = nil)
         if options && options[:valid_for]
           options.delete(:raw)
@@ -21,7 +21,7 @@ module ActiveSupport
 
       # Adds the following option:
       #   :valid_for => true 
-      #   :raw is not supported with :valid_raw
+      #   :raw is not supported with :valid_for
       def read(key, options = nil)
         if options && options.delete(:valid_for)
           options.delete(:raw)
@@ -36,6 +36,7 @@ module ActiveSupport
         ttl(key) < Time.now.to_i
       end
 
+      # only works for TTLed keys
       def ttl(key)
         parse(read(key))[:ttl]
       end
