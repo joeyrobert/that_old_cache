@@ -38,7 +38,7 @@ describe ActiveSupport::Cache::TTLedMemCacheStore do
       @cache.ttl(@key).should be_close(Time.now.to_i + @valid_for, 1)
     end
     
-    # Vendor something to time_travel this slep stuff gets annoying
+    # Vendor something to time_travel if this sleep stuff gets annoying
     it "should be expired if the ttl is less than now" do
       @cache.write("expired_ttl", "value", :valid_for => 0.1)
       sleep 1
@@ -56,7 +56,7 @@ describe ActiveSupport::Cache::TTLedMemCacheStore do
       @cache.write(@key, @value)
     end
     
-    it "should do a basic MemCacheStore#write" do
+    it "should set the non-serialized value in the cache" do
       @cache.read(@key).should == @value
     end
     
@@ -68,7 +68,7 @@ describe ActiveSupport::Cache::TTLedMemCacheStore do
       @cache.expired?(@key).should be_false
     end
     
-    it "should not raise an exception if trying to to a ttl'd read on a non-ttl'd key" do
+    it "should not raise an exception if trying a ttl'd read on a non-ttl'd key" do
       @cache.write(@key, @value)
       lambda { @cache.read(@key, :valid_for => true) }.should_not raise_error
     end

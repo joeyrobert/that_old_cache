@@ -34,7 +34,7 @@ module ActiveSupport
       # only works for TTLed keys
       def expired?(key)
         begin
-          ttl(key) < Time.now.to_i 
+          ttl(key) < Time.now.to_i
         rescue NoMethodError 
           false
         end
