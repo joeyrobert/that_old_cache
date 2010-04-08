@@ -69,12 +69,10 @@ describe ActiveSupport::Cache::TTLedMemCacheStore do
     end
     
     it "should not raise an exception if trying a ttl'd read on a non-ttl'd key" do
-      @cache.write(@key, @value)
       lambda { @cache.read(@key, :valid_for => true) }.should_not raise_error
     end
 
     it "should return nil if trying a ttl'd read on a non-ttl'd key" do
-      @cache.write(@key, @value)
       @cache.read(@key, :valid_for => true).should be_nil
     end
   end  
