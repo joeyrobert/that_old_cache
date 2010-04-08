@@ -40,14 +40,14 @@ describe ActiveSupport::Cache::TTLedMemCacheStore do
     
     # Vendor something to time_travel if this sleep stuff gets annoying
     it "should be expired if the ttl is less than now" do
-      @cache.write("expired_ttl", "value", :valid_for => 0.1)
+      @cache.write(@key, @value, :valid_for => 0.1)
       sleep 1
-      @cache.expired?("expired_ttl").should be_true
+      @cache.expired?(@key).should be_true
     end
     
     it "should not be expired if the ttl is greater than now" do
-      @cache.write("expired_ttl", "value", :valid_for => 5)
-      @cache.expired?("expired_ttl").should be_false
+      @cache.write(@key, @value, :valid_for => 5)
+      @cache.expired?(@key).should be_false
     end
   end
 
