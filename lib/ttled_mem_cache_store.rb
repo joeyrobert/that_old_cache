@@ -13,9 +13,9 @@ module ActiveSupport
       def write(key, value, options = nil)
         if options && options[:valid_for]
           options.delete(:raw)
-          super(key, encode({:data => value, :ttl => time_for(options.delete(:valid_for))}), options)
+          super(key, encode({ :data => value, :ttl => time_for(options.delete(:valid_for)) }), options)
         else
-          super(key, value, options)
+          super
         end
       end
 
@@ -25,20 +25,24 @@ module ActiveSupport
       def read(key, options = nil)
         if options && options.delete(:valid_for)
           options.delete(:raw)
-          parse(super(key, options))[:data]
+          parse(super)[:data] rescue nil
         else
-          super(key, options)
+          super
         end
       end
 
       # only works for TTLed keys
       def expired?(key)
-        ttl(key) < Time.now.to_i
+        begin
+          ttl(key) < Time.now.to_i 
+        rescue NoMethodError 
+          false
+        end
       end
 
       # only works for TTLed keys
       def ttl(key)
-        parse(read(key))[:ttl]
+        parse(read(key))[:ttl] rescue nil
       end
 
       private
@@ -46,7 +50,7 @@ module ActiveSupport
       def time_for(seconds)
         Time.now.to_i + seconds.to_i
       end
-
+      
       def parse(val)
         Yajl::Parser.new(:symbolize_keys => true).parse(val)
       end
@@ -54,7 +58,6 @@ module ActiveSupport
       def encode(val)
         Yajl::Encoder.encode(val)
       end
-
     end
   end
 end
