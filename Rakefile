@@ -30,5 +30,5 @@ spec = Gem::Specification.new do |s|
   s.add_dependency "activesupport", ">= 2.3.x"
 end
 
-desc 'Turn this plugin into a gem.'
+desc 'Packages as a Ruby gem'
 Rake::GemPackageTask.new(spec) { |pkg| pkg.gem_spec = spec }
