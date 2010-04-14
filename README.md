@@ -11,9 +11,8 @@ It does this by not using the memcached TTL and storing the expiration time in t
 Requirements
 ------------
 
-`activesupport >= 2.3.x`
-
-`yajl-ruby >= 0.7.x`
+	activesupport >= 2.3.x
+	yajl-ruby >= 0.7.x
 
 Quick Example
 -------------
@@ -47,4 +46,5 @@ Contributors
 ------------
 
 Joey Robert ([http://joeyrobert.org/](http://joeyrobert.org/))
+
 Brendon Murphy ([http://www.techfreak.net/](http://www.techfreak.net/))
