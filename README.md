@@ -8,6 +8,11 @@ Getting sick of memcached just kicking your stuff out of memory in Rails? Maybe 
 
 It does this by not using the memcached TTL and storing the expiration time in the memcached value. This way we can serve the old cache while an external process updates it (for example).
 
+Install
+-------
+
+	sudo gem install that_old_cache
+
 Requirements
 ------------
 
