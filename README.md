@@ -12,6 +12,7 @@ Requirements
 ------------
 
 `activesupport >= 2.3.x`
+
 `yajl-ruby >= 0.7.x`
 
 Quick Example
@@ -19,11 +20,11 @@ Quick Example
 
 Say you have an expensive query used to populate your homepage content that you'd like to be refreshed every two hours. Grabbing this data on page load is a bad idea. We could use the active support memcached store, but every two hours, some poor user will be hit with the burden of a long page load. Here's what we can do:
 
-`environment.rb`
+**environment.rb**
 
 	require 'that_old_cache'
 
-`main_controller.rb`
+**main_controller.rb**
 
 	def index
 	  # Note: this takes the same parameters as ActiveSupport::Cache::MemCacheStore
@@ -36,7 +37,7 @@ Say you have an expensive query used to populate your homepage content that you'
 	  end 
 	end
 
-`data_fetcher.rb`
+**data_fetcher.rb**
 
 	cache = ActiveSupport::Cache::TTLedMemCacheStore.new('localhost')
 	expensive_data = SomeReallyLongProcessThing.run
