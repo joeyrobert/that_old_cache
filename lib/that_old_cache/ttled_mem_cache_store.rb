@@ -3,10 +3,7 @@ require 'yajl'
 
 module ActiveSupport
   module Cache
-    class TTLedMemCacheStoreException < Exception; end
-
     class TTLedMemCacheStore < MemCacheStore
-
       # Adds the following option:
       #   :valid_for => number of seconds from now that the cache with "expire"
       #   :raw is not supported with :valid_for
